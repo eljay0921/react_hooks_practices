@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
 
-function App() {
+const App = () => {
+  const [count, setCount] = useState(0);
+  const [email, setEmail] = useState("");
+
+  const incrementCount = () => setCount(count + 1);
+  const decrementCount = () => setCount(count - 1);
+
+  const updateEmail = (e) => {
+    const {
+      target: { value },
+    } = e;
+    setEmail(value);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      Count : {count}
+      <br />
+      <button onClick={incrementCount}>Increeeeement</button>
+      <button onClick={decrementCount}>Decreeeeement</button>
+      <br />
+      <br />
+      {email}
+      <br />
+      <input placeholder="Email" value={email} onChange={updateEmail} />
     </div>
   );
-}
-
+};
 export default App;
