@@ -1,30 +1,21 @@
 import React, { useState } from "react";
 
-const App = () => {
-  const [count, setCount] = useState(0);
-  const [email, setEmail] = useState("");
-
-  const incrementCount = () => setCount(count + 1);
-  const decrementCount = () => setCount(count - 1);
-
-  const updateEmail = (e) => {
-    const {
-      target: { value },
-    } = e;
-    setEmail(value);
+const useInput = (initialValue) => {
+  const [value, setValue] = useState(initialValue);
+  const onChange = (event) => {
+    console.log(event);
   };
+  return { value, onChange };
+};
 
+const App = () => {
+  const name = useInput("Mr.");
+
+  // {...name} => name 안의 모든 것을 unpacking 한다. (ex. value, onChange, etc...)
   return (
     <div>
-      Count : {count}
-      <br />
-      <button onClick={incrementCount}>Increeeeement</button>
-      <button onClick={decrementCount}>Decreeeeement</button>
-      <br />
-      <br />
-      {email}
-      <br />
-      <input placeholder="Email" value={email} onChange={updateEmail} />
+      <h1>Hello bro</h1>
+      <input placeholder="Name" {...name} />
     </div>
   );
 };
