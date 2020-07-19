@@ -1,24 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-const useTitle = (initialTitle) => {
-  const [title, setTitle] = useState(initialTitle);
+const useClick = (onClick) => {
+  // if (typeof onclick !== "function") {
+  //   return;
+  // }
 
-  const updateTitle = () => {
-    const htmlTitle = document.querySelector("title");
-    htmlTitle.innerText = title;
-  };
+  const element = useRef();
 
-  useEffect(updateTitle, [title]);
+  useEffect(() => {
+    // 첫번째 인자가 componentDidMount 시 호출될 function
+    if (element.current) {
+      element.current.addEventListener("click", onClick);
+    }
 
-  return setTitle;
+    // useEffect에서 return하는 것은 : componentWillUnmount 시 호출되는 function
+    return () => {
+      if (element.current) {
+        element.current.removeEventListener("click", onClick);
+      }
+    };
+    // 두번째 인자(deps)는 dependencies (componentDidUpdate)
+  }, []);
+
+  return element;
 };
 
 const App = () => {
-  const titleUpdater = useTitle("Loading.......");
-  setTimeout(() => titleUpdater("Home"), 3000);
+  const sayHello = () => console.log("Hello bros");
+  const title = useClick(sayHello);
+
   return (
     <div className="App">
       <div>Hi !</div>
+      <h1 ref={title}>oh my god</h1>
     </div>
   );
 };
