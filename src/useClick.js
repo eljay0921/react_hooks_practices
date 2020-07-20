@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-export const useClick = (onClick) => {
+const useClick = (onClick) => {
   // if (typeof onclick !== "function") {
   //   return;
   // }
@@ -24,3 +24,5 @@ export const useClick = (onClick) => {
 
   return element;
 };
+
+export default useClick;

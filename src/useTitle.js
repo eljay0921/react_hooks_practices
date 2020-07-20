@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export const useTitle = (initialTitle) => {
+const useTitle = (initialTitle) => {
   const [title, setTitle] = useState(initialTitle);
 
   const updateTitle = () => {
@@ -12,3 +12,5 @@ export const useTitle = (initialTitle) => {
 
   return setTitle;
 };
+
+export default useTitle;
