@@ -8,9 +8,20 @@ const useAxios = (opts, axiosInstance = defaultAxios) => {
     data: null,
   });
 
+  const [trigger, setTrigger] = useState(0);
+
   if (!opts.url) {
     return;
   }
+
+  const refetch = () => {
+    setState({
+      ...state,
+      loading: true,
+    });
+
+    setTrigger(Date.now());
+  };
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(() => {
@@ -29,9 +40,9 @@ const useAxios = (opts, axiosInstance = defaultAxios) => {
           error,
         });
       });
-  }, []);
+  }, [trigger]);
 
-  return state;
+  return { ...state, refetch };
 };
 
 export default useAxios;
