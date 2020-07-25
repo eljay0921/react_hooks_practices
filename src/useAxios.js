@@ -20,6 +20,7 @@ const useAxios = (opts, axiosInstance = defaultAxios) => {
       loading: true,
     });
 
+    // 랜덤 숫자처럼 활용
     setTrigger(Date.now());
   };
 
